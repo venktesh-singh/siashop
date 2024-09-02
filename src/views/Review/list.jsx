@@ -7,6 +7,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import asiamama from '../../image/logj02.png';
+import { BASE_URL } from '../../config/apiurl';
 
 
 function ListReview(){
@@ -18,7 +19,7 @@ function ListReview(){
     
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/v1/reviews/');
+            const response = await fetch(`${BASE_URL}/reviews/`);
             if (!response.ok) {
                 throw new Error('Failed to fetch review');
             }
@@ -37,7 +38,7 @@ function ListReview(){
     console.log("Check Review",checkUser);
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/reviews/${id}`, {
+            const response = await fetch(`${BASE_URL}/reviews/${id}`, {
                 method: 'DELETE',
             });
 

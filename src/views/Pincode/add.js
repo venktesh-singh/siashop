@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../../config/apiurl';
 
 const AddPinCode = () => {
     const [addPincode, setAddPincode] = useState({
@@ -25,7 +26,7 @@ const AddPinCode = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:4000/api/v1/pincodes/add", {
+            const response = await fetch(`${BASE_URL}/pincodes/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

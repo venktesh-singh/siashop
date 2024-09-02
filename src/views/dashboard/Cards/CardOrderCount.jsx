@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { BASE_URL } from '../../../config/apiurl';
 
 const GradientCard = styled(Card)(({ theme }) => ({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -19,7 +20,7 @@ function CardOrderCount() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/v1/orders/get/count');
+        const response = await fetch(`${BASE_URL}/orders/get/count`);
         const data = await response.json();
         setOrderCount(data);
       } catch (e) {

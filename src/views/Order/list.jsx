@@ -7,6 +7,7 @@ import moment from 'moment';
 import TablePagination from '@mui/material/TablePagination';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../../config/apiurl';
 
 function OrderList() {
     const [page, setPage] = useState(0);
@@ -17,7 +18,7 @@ function OrderList() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/v1/orders/');
+            const response = await fetch(`${BASE_URL}/orders/`);
             if (!response.ok) {
                 throw new Error('Failed to fetch orders');
             }
@@ -40,7 +41,7 @@ function OrderList() {
 
     const orderUpdate = async (id, newStatus) => {
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/orders/status/update/${id}`, {
+            const response = await fetch(`${BASE_URL}/orders/status/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -72,7 +73,7 @@ function OrderList() {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/orders/${id}`, {
+            const response = await fetch(`${BASE_URL}/orders/${id}`, {
                 method: 'DELETE',
             });
 

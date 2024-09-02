@@ -9,6 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import asiamama from '../../image/logj02.png'
+import { BASE_URL } from '../../config/apiurl';
 
 function ProductList() {
     const [page, setPage] = useState(0);
@@ -19,7 +20,7 @@ function ProductList() {
     //console.log("Product Image",product);  
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/v1/products/');
+            const response = await fetch(`${BASE_URL}/products/`);
             if (!response.ok) {
                 throw new Error('Failed to fetch products');
             }
@@ -36,7 +37,7 @@ function ProductList() {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/products/${id}`, {
+            const response = await fetch(`${BASE_URL}/products/${id}`, {
                 method: 'DELETE',
             });
 
@@ -172,7 +173,13 @@ function ProductList() {
                                                 <Link to={`/product/product-detail`} state={{ prod }} style={{ padding: 10 }}>
                                                     <FiEye size='25' className="f-30 text-c-green" />
                                                 </Link>
-                                                <Link style={{ padding: 2 }} state={{ prod }} to={`/product/edit/${prod._id}`}>
+                                                <Link style={{ padding: 2 }} to={`/product/edit/${prod._id}`}
+                                                        state={{
+                                                            prod,
+                                                            cat_name: prod?.category?._id,
+                                                            subcat_name: prod?.subcategory?._id,
+                                                        }}
+                                                >
                                                     <FiEdit size='25' className="f-30 text-c-blue" />
                                                 </Link>
                                                 <Link

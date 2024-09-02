@@ -4,6 +4,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../../config/apiurl';
 
 const UpdatePincode = () => {
     const location = useLocation();
@@ -24,7 +25,7 @@ const UpdatePincode = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/pincodes/edit/${id}`, {
+            const response = await fetch(`${BASE_URL}/pincodes/edit/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

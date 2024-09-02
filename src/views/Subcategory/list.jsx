@@ -7,6 +7,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import asiamama from '../../image/logj02.png';
+import { BASE_URL } from '../../config/apiurl';
 
 function SubCategoryList() {
     const [page, setPage] = useState(0);
@@ -17,7 +18,7 @@ function SubCategoryList() {
     
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/v1/subcategories/');
+            const response = await fetch(`${BASE_URL}/subcategories/`);
             if (!response.ok) {
                 throw new Error('Failed to fetch subcategory');
             }
@@ -36,7 +37,7 @@ function SubCategoryList() {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/subcategories/${id}`, {
+            const response = await fetch(`${BASE_URL}/subcategories/${id}`, {
                 method: 'DELETE',
             });
 
@@ -156,7 +157,14 @@ function SubCategoryList() {
                                                 <Link to={`/subcategory/detail`} state={{ cat }} style={{ padding: 10 }}>
                                                     <FiEye size='25' className="f-30 text-c-green" />
                                                 </Link>
-                                                <Link style={{ padding: 2 }} state={{ cat }} to={`/subcategory/edit/${cat?._id}`}>
+                                                <Link style={{ padding: 2 }} to={`/subcategory/edit/${cat?._id}`}
+                                                    state={{ 
+                                                        cat:{
+                                                            id: cat._id,
+                                                            category: cat.category._id,
+                                                            subcat_name: cat.subcat_name
+                                                    } }}
+                                                >
                                                     <FiEdit size='25' className="f-30 text-c-blue" />
                                                 </Link>
                                                 <Link

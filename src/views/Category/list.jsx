@@ -7,6 +7,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import asiamama from '../../image/logj02.png';
+import { BASE_URL } from '../../config/apiurl';
 
 function CategoryList() {
     const [page, setPage] = useState(0);
@@ -17,7 +18,7 @@ function CategoryList() {
     
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/v1/categories/');
+            const response = await fetch(`${BASE_URL}/categories/`);
             if (!response.ok) {
                 throw new Error('Failed to fetch category');
             }
@@ -34,7 +35,7 @@ function CategoryList() {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/categories/${id}`, {
+            const response = await fetch(`${BASE_URL}/categories/${id}`, {
                 method: 'DELETE',
             });
 

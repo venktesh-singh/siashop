@@ -4,10 +4,11 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../../config/apiurl';
 
 const SubCategoryUpdate = () => {
     const location = useLocation();
-    const id = location.state?.cat._id;
+    const id = location?.state?.cat?.id || '';
     const [updateSubcategory, setUpdateSubcategory] = useState(location.state?.cat || {});
     const [error, setError] = useState(null);
     const [categories, setCategories] = useState([]);
@@ -25,7 +26,7 @@ const SubCategoryUpdate = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost:4000/api/v1/categories/');
+                const response = await fetch(`${BASE_URL}/categories/`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch categories');
                 }
@@ -53,7 +54,7 @@ const SubCategoryUpdate = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/subcategories/edit/${id}`, {
+            const response = await fetch(`${BASE_URL}/subcategories/edit/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -150,18 +151,16 @@ const SubCategoryUpdate = () => {
                                         <Form.Group controlId="formCategoryName">
                                             <Form.Label>Category</Form.Label>
                                             <Form.Select
-                                                as="select"
-                                                name="cat_name"
-                                                value={updateSubcategory.cat_name}
+                                                name="category"
+                                                value={updateSubcategory.category}
                                                 onChange={handleCategoryChange}
-                                                className="form-control"
                                             >
                                                 <option value="">Select Category</option>
-                                                {categories.map((cat) => ( 
+                                                {categories.map((cat) => (
                                                     <option
                                                         key={cat._id}
                                                         value={cat._id}
-                                                        className={updateSubcategory.category.cat_name === cat.cat_name ? 'selected' : ''}
+                                                        className={updateSubcategory.category._id === cat._id ? 'selected' : ''}
                                                     >
                                                         {cat.cat_name}
                                                     </option>
