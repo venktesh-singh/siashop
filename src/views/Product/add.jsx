@@ -173,9 +173,9 @@ const AddProduct = () => {
                                             <Form.Control
                                                 type="text"
                                                 placeholder="Enter Product Name"
-                                                name="name"
-                                                value={addProduct.product_name}
-                                                //onChange={handleChange}
+                                                name="product_name"
+                                                value={addProduct.product_name}     
+                                                onChange={handleChange}
                                             />
                                         </Form.Group>
                                     </Col>
